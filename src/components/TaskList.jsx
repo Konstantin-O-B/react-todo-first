@@ -3,7 +3,7 @@ import Task from './Task';
 
 
 
-function TaskList({arrayTasks, remove, change, edit, filtered, setStatus, setCondition, condition}, ...props) {
+function TaskList({remove, change, edit, filtered}, ...props) {
  
 /* console.log(props); */
     return (  
@@ -15,9 +15,8 @@ function TaskList({arrayTasks, remove, change, edit, filtered, setStatus, setCon
                   key = {itemTask.id}
                   change = {change}
                   edit = {edit}
-                  setStatus = {setStatus}
-                  setCondition = {setCondition}
-                  condition ={condition}
+                  /* setCondition = {setCondition}
+                  condition ={condition} */
               />
                 )}
       

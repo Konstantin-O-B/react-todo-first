@@ -15,8 +15,12 @@ function App() {
   const [task, setTask] = useState('');
   const [filtered, setFiltered] = useState([...arrayTasks]);
   const [condition, setCondition] = useState('');
+  const [itemLeft, setItemLeft] = useState([...arrayTasks])
   
   useEffect(()=>{setFiltered([...arrayTasks])}, [arrayTasks])
+
+    
+    
   
               /* удаление/добавление таски */
 
@@ -43,17 +47,24 @@ function App() {
       })
     }
 
+    
     const todoFilter = (value) => {
       console.log(value);
       if (value === 'all') {setFiltered(arrayTasks)}
       else if (value === 'active') {
         let activeArray = [...arrayTasks].filter((item) => item.status);
         setFiltered(activeArray);
+        
       } else if (value === 'completed') {
         let completeArray = [...arrayTasks].filter((item) => !item.status);
         setFiltered(completeArray);
       }
 
+    }
+
+    const clearCompleted = () => {
+      let clearTasks = [...arrayTasks].filter(item => item.status);
+      setArrayTasks(clearTasks);
     }
 
 
@@ -88,6 +99,8 @@ function App() {
         <Footer
         arrayTasks = {arrayTasks}
         todoFilter = {todoFilter}
+        clearCompleted = {clearCompleted}
+
         />
         
       </section>

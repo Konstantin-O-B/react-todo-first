@@ -4,19 +4,18 @@ import { formatDistanceToNow } from 'date-fns'
 
 
 
-function Task({itemtask, remove, edit, setStatus, setCondition, condition}, props) {
-/* const [condition, setCondition] = useState(''); */
+function Task({itemtask, remove, edit}, props) {
+const [condition, setCondition] = useState('');
 const [check, setCheck] = useState(false);
 const [showEdit, setShowEdit] = useState('')
-/* const [status, setStatus] = useState() */
 
-/* const [editValue, setEditValue] = useState(itemtask.task) */
 let result = formatDistanceToNow(new Date(itemtask.id),{includeSeconds: true})
 
 
 const handleClick = function(event) {
   
   let target = event.target;
+  console.log(target);
   if (target.classList.contains('icon-edit') && condition !== 'completed') {
     setCondition('editing');
     setShowEdit(true)
