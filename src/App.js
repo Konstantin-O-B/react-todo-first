@@ -14,8 +14,9 @@ function App() {
   const [arrayTasks, setArrayTasks] = useState([]);
   const [task, setTask] = useState('');
   const [filtered, setFiltered] = useState([...arrayTasks]);
-
-  useEffect(()=>{setFiltered(arrayTasks)}, [arrayTasks])
+  const [condition, setCondition] = useState('');
+  
+  useEffect(()=>{setFiltered([...arrayTasks])}, [arrayTasks])
   
               /* удаление/добавление таски */
 
@@ -24,7 +25,7 @@ function App() {
         const newTask = {
           id: Date.now(),
           task,
-          status: 'active'
+          status: true
         }
         setArrayTasks([...arrayTasks, newTask])
         setTask('')
@@ -46,10 +47,10 @@ function App() {
       console.log(value);
       if (value === 'all') {setFiltered(arrayTasks)}
       else if (value === 'active') {
-        let activeArray = [...arrayTasks].filter((item) => item.status === 'active');
+        let activeArray = [...arrayTasks].filter((item) => item.status);
         setFiltered(activeArray);
       } else if (value === 'completed') {
-        let completeArray = [...arrayTasks].filter((item) => item.status === 'complete');
+        let completeArray = [...arrayTasks].filter((item) => !item.status);
         setFiltered(completeArray);
       }
 
@@ -77,7 +78,9 @@ function App() {
             remove = {deleteTask}
             edit = {editTask}
             filtered = {filtered}
-            
+            /* etStatus = {setStatus} */
+            setCondition = {setCondition}
+            condition = {condition}
           />
           
         
