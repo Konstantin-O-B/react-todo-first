@@ -14,14 +14,27 @@ function App() {
   const [arrayTasks, setArrayTasks] = useState([]);
   const [task, setTask] = useState('');
   const [filtered, setFiltered] = useState([...arrayTasks]);
-  const [condition, setCondition] = useState('');
-  const [itemLeft, setItemLeft] = useState([...arrayTasks])
+
   
   useEffect(()=>{setFiltered([...arrayTasks])}, [arrayTasks])
 
+    /*              фильтр таски             */
+
     
-    
-  
+  const todoFilter = (value) => {
+    console.log(value);
+    if (value === 'all') {setFiltered(arrayTasks)}
+    else if (value === 'active') {
+      let activeArray = [...arrayTasks].filter((item) => item.status);
+      setFiltered(activeArray);
+      
+    } else if (value === 'completed') {
+      let completeArray = [...arrayTasks].filter((item) => !item.status);
+      setFiltered(completeArray);
+    }
+
+  }
+
               /* удаление/добавление таски */
 
     const addNewTask = () => {
@@ -40,32 +53,24 @@ function App() {
 
               /* изменение таски */
     const editTask = (task, newValue) => {
-      /* console.log(task, newValue); */
+
       arrayTasks.map(currentItem => {
         if (currentItem.id=== task.id)
          {currentItem.task = newValue}
       })
     }
 
-    
-    const todoFilter = (value) => {
-      console.log(value);
-      if (value === 'all') {setFiltered(arrayTasks)}
-      else if (value === 'active') {
-        let activeArray = [...arrayTasks].filter((item) => item.status);
-        setFiltered(activeArray);
-        
-      } else if (value === 'completed') {
-        let completeArray = [...arrayTasks].filter((item) => !item.status);
-        setFiltered(completeArray);
-      }
 
-    }
+
+    
+
 
     const clearCompleted = () => {
       let clearTasks = [...arrayTasks].filter(item => item.status);
       setArrayTasks(clearTasks);
     }
+
+
 
 
   return (
@@ -82,16 +87,17 @@ function App() {
       </header>
       <section className="main">
         {/* {console.log(arrayTasks)} */}
-        
-        
           <TaskList
             arrayTasks = {arrayTasks}
+            setArrayTasks = {setArrayTasks}
             remove = {deleteTask}
             edit = {editTask}
             filtered = {filtered}
-            /* etStatus = {setStatus} */
-            setCondition = {setCondition}
-            condition = {condition}
+            /* setStatus = {setStatus}
+            status = {status} */
+            /* handleClick = {handleClick} */
+            /* setCondition = {setCondition}
+            condition = {condition} */
           />
           
         

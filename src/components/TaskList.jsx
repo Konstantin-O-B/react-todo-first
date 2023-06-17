@@ -3,20 +3,23 @@ import Task from './Task';
 
 
 
-function TaskList({remove, change, edit, filtered}, ...props) {
+function TaskList({arrayTasks, setArrayTasks, remove, change, edit, filtered}, ...props) {
+  const [status, setStatus] = useState(true);
  
 /* console.log(props); */
     return (  
         <ul className="todo-list">
                 {filtered.map(itemTask => 
                   <Task 
+                  arrayTasks = {arrayTasks}
+                  setArrayTasks = {setArrayTasks}
                   itemtask={itemTask}
                   remove = {remove}
                   key = {itemTask.id}
                   change = {change}
                   edit = {edit}
-                  /* setCondition = {setCondition}
-                  condition ={condition} */
+                  status = {status}
+                  setStatus = {setStatus}
               />
                 )}
       
