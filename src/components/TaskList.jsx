@@ -3,8 +3,8 @@ import Task from './Task';
 
 
 
-function TaskList({arrayTasks, setArrayTasks, remove, change, edit, filtered}, ...props) {
-  const [status, setStatus] = useState(true);
+function TaskList({arrayTasks, setArrayTasks, remove, change, edit, filtered, status, setStatus, changeComplete}, ...props) {
+  
  
 /* console.log(props); */
     return (  
@@ -20,6 +20,7 @@ function TaskList({arrayTasks, setArrayTasks, remove, change, edit, filtered}, .
                   edit = {edit}
                   status = {status}
                   setStatus = {setStatus}
+                  changeComplete = {changeComplete}
               />
                 )}
       

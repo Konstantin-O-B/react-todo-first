@@ -14,6 +14,7 @@ function App() {
   const [arrayTasks, setArrayTasks] = useState([]);
   const [task, setTask] = useState('');
   const [filtered, setFiltered] = useState([...arrayTasks]);
+  const [status, setStatus] = useState(true);
 
   
   useEffect(()=>{setFiltered([...arrayTasks])}, [arrayTasks])
@@ -33,6 +34,16 @@ function App() {
       setFiltered(completeArray);
     }
 
+  }
+
+  /*           изменение класса таски               */
+
+  const changeComplete = (id) => {
+    let newArr = [...arrayTasks].filter(item => {
+      if (item.id === id) {setStatus(!status)}
+      return item;
+    })
+    setArrayTasks(newArr)
   }
 
               /* удаление/добавление таски */
@@ -93,6 +104,7 @@ function App() {
             remove = {deleteTask}
             edit = {editTask}
             filtered = {filtered}
+            changeComplete = {changeComplete}
             /* setStatus = {setStatus}
             status = {status} */
             /* handleClick = {handleClick} */

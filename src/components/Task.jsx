@@ -4,7 +4,7 @@ import { formatDistanceToNow } from 'date-fns'
 
 
 
-function Task({arrayTasks, setArrayTasks, itemtask, remove, edit, status, setStatus/* , status, setStatus *//* , setCondition, condition */}, props) {
+function Task({arrayTasks, setArrayTasks, itemtask, remove, edit, status, setStatus, changeComplete/* , status, setStatus *//* , setCondition, condition */}, props) {
 const [check, setCheck] = useState(false);
 const [showEdit, setShowEdit] = useState('')
 
@@ -13,9 +13,10 @@ const [showEdit, setShowEdit] = useState('')
 let result = formatDistanceToNow(new Date(itemtask.id),{includeSeconds: true})
 
 
-const handleClick = function() {
+const handleClick = function(element) {
 itemtask.status = !itemtask.status
 setStatus(itemtask.status)
+element.classList.add('completed')
 }
 
 const changeEdit = () => {
@@ -26,8 +27,11 @@ const changeEdit = () => {
 
 
     return ( 
-        <li className={status ? 'active' : 'completed'}
-            onClick={handleClick}
+        <li /* className={status ? 'active' : 'completed'} */
+            onClick={(e) => {handleClick(e.target.closest('li'))
+            changeComplete(itemtask.id)
+          }}
+            /* onChange={changeComplete(itemtask.id)} */
         >
             <div className="view">
               <input className="toggle" type="checkbox"  checked={check}/>
