@@ -40,7 +40,7 @@ function App() {
 
   const changeComplete = (id) => {
     let newArr = [...arrayTasks].filter(item => {
-      if (item.id === id) {setStatus(!status)}
+      if (item.id === id) {item.status = !item.status}
       return item;
     })
     setArrayTasks(newArr)

@@ -13,11 +13,11 @@ const [showEdit, setShowEdit] = useState('')
 let result = formatDistanceToNow(new Date(itemtask.id),{includeSeconds: true})
 
 
-const handleClick = function(element) {
+/* const handleClick = function(element) {
 itemtask.status = !itemtask.status
 setStatus(itemtask.status)
 element.classList.add('completed')
-}
+} */
 
 const changeEdit = () => {
   /* setCondition('') */
@@ -28,7 +28,7 @@ const changeEdit = () => {
 
     return ( 
         <li /* className={status ? 'active' : 'completed'} */
-            onClick={(e) => {handleClick(e.target.closest('li'))
+            onClick={(e) => {/* handleClick(e.target.closest('li')) */
             changeComplete(itemtask.id)
           }}
             /* onChange={changeComplete(itemtask.id)} */
@@ -41,7 +41,7 @@ const changeEdit = () => {
               </label>
               <button 
               className="icon icon-edit"
-              onClick={handleClick}
+              /* onClick={handleClick} */
               >
 
               </button>
