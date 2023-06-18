@@ -14,12 +14,14 @@ function App() {
   const [arrayTasks, setArrayTasks] = useState([]);
   const [task, setTask] = useState('');
   const [filtered, setFiltered] = useState([...arrayTasks]);
-  const [status, setStatus] = useState(true);
+  const [showEdit, setShowEdit] = useState('');
+  const [value, setValue] = useState('');
+  
 
   
   useEffect(()=>{setFiltered([...arrayTasks])}, [arrayTasks])
 
-    /*              фильтр таски             */
+  /*              фильтр таски             */
 
     
   const todoFilter = (value) => {
@@ -38,15 +40,29 @@ function App() {
 
   /*           изменение класса таски               */
 
-  const changeComplete = (id) => {
-    let newArr = [...arrayTasks].filter(item => {
-      if (item.id === id) {item.status = !item.status}
-      return item;
-    })
-    setArrayTasks(newArr)
+  const changeComplete = (event, id, itemtask) => {
+    if (event.target.tagName === 'SPAN' || event.target.classList.contains('toggle'))
+    {let newArr = arrayTasks.map(item => {
+      if (item.id === id) {return {...item, status: !item.status}}
+      else {return item}
+    }) 
+    setArrayTasks(newArr)}
+
+    if (event.target.classList.contains('icon-destroy')) {
+      deleteTask(itemtask);
+    }
+
+    if (event.target.classList.contains('icon-edit') && event.target.closest('li').classList.contains('active')) {
+      setShowEdit(id);
+      event.target.closest('li').classList.remove('active')
+      event.target.closest('li').classList.add('editing')
+      setValue(itemtask.task)
+
+    }
+
   }
 
-              /* удаление/добавление таски */
+  /* удаление/добавление таски */
 
     const addNewTask = () => {
       if (!task) {return}
@@ -63,25 +79,21 @@ function App() {
     }
 
               /* изменение таски */
-    const editTask = (task, newValue) => {
+    const editTask = (id) => {
 
-      arrayTasks.map(currentItem => {
-        if (currentItem.id=== task.id)
-         {currentItem.task = newValue}
+     let newArr = arrayTasks.map(currentItem => {
+        if (currentItem.id=== id)
+         {currentItem.task = value}
+         return currentItem;
       })
+      setArrayTasks(newArr)
+      setShowEdit('')
     }
-
-
-
-    
-
 
     const clearCompleted = () => {
       let clearTasks = [...arrayTasks].filter(item => item.status);
       setArrayTasks(clearTasks);
     }
-
-
 
 
   return (
@@ -97,23 +109,16 @@ function App() {
         />
       </header>
       <section className="main">
-        {/* {console.log(arrayTasks)} */}
           <TaskList
-            arrayTasks = {arrayTasks}
-            setArrayTasks = {setArrayTasks}
             remove = {deleteTask}
-            edit = {editTask}
+            editTask = {editTask}
             filtered = {filtered}
             changeComplete = {changeComplete}
-            /* setStatus = {setStatus}
-            status = {status} */
-            /* handleClick = {handleClick} */
-            /* setCondition = {setCondition}
-            condition = {condition} */
+            showEdit={showEdit}
+            value={value}
+            setValue={setValue}
           />
           
-        
-
         <Footer
         arrayTasks = {arrayTasks}
         todoFilter = {todoFilter}

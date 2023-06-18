@@ -1,7 +1,7 @@
 import React from 'react'
 import TaskFilter from './TaskFilter';
 
-function Footer({arrayTasks, todoFilter, clearCompleted}, props) {
+function Footer({arrayTasks, todoFilter, clearCompleted}) {
   let activeTasks = arrayTasks.filter(item => item.status);
     return (  
         <footer className="footer">

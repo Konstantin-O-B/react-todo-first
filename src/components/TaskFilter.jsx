@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-function TaskFilter({todoFilter}, props) {
+function TaskFilter({todoFilter}) {
 
 
 
@@ -10,8 +10,6 @@ function TaskFilter({todoFilter}, props) {
         onClick={(e) => 
         {
           todoFilter(e.target.value);
-          /* console.log(e.target.value); */
-          /* console.log(e.target.innerText); */
         }}
         >
             <li>
